@@ -11,17 +11,21 @@ fun DetallePage(
     navHostController: NavHostController,
     signoid: String
 ) {
-    val viewModel : DetalleViewModel = viewModel(
+    val viewModel: DetalleViewModel = viewModel(
         factory = DetalleViewModelFactory(
             repositorio = Repository(),
             router = Router(navHostController),
             signoid = signoid
         )
     )
+
+    val router = Router(navHostController)
+
     DetalleView(
         state = viewModel.uiState,
         onAction = { intencion ->
             viewModel.ejecutar(intencion)
-        }
+        },
+        router = router
     )
 }

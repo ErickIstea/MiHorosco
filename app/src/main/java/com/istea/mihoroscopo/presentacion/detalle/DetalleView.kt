@@ -33,16 +33,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.istea.mihoroscopo.repository.Horoscopo
 import com.istea.mihoroscopo.repository.Signo
+import com.istea.mihoroscopo.router.Router
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetalleView (
+fun DetalleView(
     modifier: Modifier = Modifier,
-    state : DetalleEstado,
-    onAction: (DetalleIntencion)->Unit
+    state: DetalleEstado,
+    onAction: (DetalleIntencion) -> Unit,
+    router: Router
 ) {
-
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         onAction(DetalleIntencion.CargarContenido)
     }
@@ -51,20 +52,19 @@ fun DetalleView (
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.secondary
                 ),
-                title = { Text(text = "Horoscopo") },
+                title = { Text(text = "Horóscopo") },
                 navigationIcon = {
                     IconButton(onClick = {
-
+                        router.back()
                     }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Localized description"
+                            contentDescription = "Navegar hacia atrás"
                         )
                     }
-
                 }
             )
         }
@@ -73,7 +73,7 @@ fun DetalleView (
             when (state) {
                 DetalleEstado.Cargando -> Cargando()
                 is DetalleEstado.Error -> Text(text = state.mensaje)
-                is DetalleEstado.Resultado -> Contenido( state.horoscopo )
+                is DetalleEstado.Resultado -> Contenido(state.horoscopo)
                 DetalleEstado.Vacio -> Text(text = "")
             }
         }
@@ -172,7 +172,7 @@ fun PrediccionView(titulo:String, prediccion: String){
                 modifier = Modifier
                     .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
-                text = "Si aprobar tu quieres, estudiar tu debes"
+                text = prediccion 
             )
         }
     }
