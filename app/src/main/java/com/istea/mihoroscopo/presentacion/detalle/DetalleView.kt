@@ -74,7 +74,7 @@ fun DetalleView (
                 DetalleEstado.Cargando -> Cargando()
                 is DetalleEstado.Error -> Text(text = state.mensaje)
                 is DetalleEstado.Resultado -> Contenido( state.horoscopo )
-                DetalleEstado.Vacio -> Text(text = "")
+                DetalleEstado.Vacio -> Cargando()
             }
         }
     }
