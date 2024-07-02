@@ -20,6 +20,7 @@ fun DetallePage(
     )
     DetalleView(
         state = viewModel.uiState,
+        onBackClick = { navHostController.popBackStack() },
         onAction = { intencion ->
             viewModel.ejecutar(intencion)
         }

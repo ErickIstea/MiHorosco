@@ -40,25 +40,25 @@ import com.istea.mihoroscopo.repository.Signo
 fun DetalleView (
     modifier: Modifier = Modifier,
     state : DetalleEstado,
+    onBackClick: () -> Unit,
     onAction: (DetalleIntencion)->Unit
 ) {
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         onAction(DetalleIntencion.CargarContenido)
+
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.secondary
                 ),
                 title = { Text(text = "Horoscopo") },
                 navigationIcon = {
-                    IconButton(onClick = {
-
-                    }) {
+                    IconButton(onClick = { onBackClick() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Localized description"
@@ -172,7 +172,7 @@ fun PrediccionView(titulo:String, prediccion: String){
                 modifier = Modifier
                     .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
-                text = "Si aprobar tu quieres, estudiar tu debes"
+                text = prediccion
             )
         }
     }
