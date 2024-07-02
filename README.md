@@ -1,4 +1,5 @@
 # MiHorosco
+## Mathieu Claudio
 
 La aplicación MiHoroscopo tiene algunos errores que deben ser corregidos:
 El botón de back no funciona. (3 puntos)
