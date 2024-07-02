@@ -25,14 +25,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.navigation.compose.rememberNavController
 import com.istea.mihoroscopo.repository.Horoscopo
 import com.istea.mihoroscopo.repository.Signo
+import com.istea.mihoroscopo.router.Router
+import com.istea.mihoroscopo.router.Ruta
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,21 +47,27 @@ fun DetalleView (
     onAction: (DetalleIntencion)->Unit
 ) {
 
+
+
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         onAction(DetalleIntencion.CargarContenido)
     }
+
+    //val navHostController = rememberNavController()
+    //val router = remember{ Router(navHostController) }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.secondary
                 ),
                 title = { Text(text = "Horoscopo") },
                 navigationIcon = {
                     IconButton(onClick = {
-
+                        onAction(DetalleIntencion.IrParaAtras)
+                        //navHostController.navigate(Ruta.Signos.id)
                     }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
@@ -172,8 +182,11 @@ fun PrediccionView(titulo:String, prediccion: String){
                 modifier = Modifier
                     .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
-                text = "Si aprobar tu quieres, estudiar tu debes"
+                text = prediccion
+                //text = "Si aprobar tu quieres, estudiar tu debes"
             )
         }
     }
 }
+
+
