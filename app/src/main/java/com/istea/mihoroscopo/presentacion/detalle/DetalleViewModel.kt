@@ -31,8 +31,8 @@ class DetalleViewModel(
     }
 
     private fun cargarContenido(){
-        //agrego la linea 35 para que se vea el cargando
-        uiState = DetalleEstado.Cargando
+
+        uiState = DetalleEstado.Cargando //agrego la para que se vea el cargando
         viewModelScope.launch {
             val horoscopo = repositorio.getHoroscopo(signoId = signoid)
             uiState = DetalleEstado.Resultado(horoscopo = horoscopo)
