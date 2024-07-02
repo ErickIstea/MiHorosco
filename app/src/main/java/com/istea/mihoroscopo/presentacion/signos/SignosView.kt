@@ -30,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.navigation.NavHostController
 import com.istea.mihoroscopo.repository.Signo
 import kotlin.math.sign
 
@@ -39,7 +40,7 @@ import kotlin.math.sign
 fun SignosView (
     modifier: Modifier = Modifier,
     state : SignosEstado,
-    onAction: (SignosIntencion)->Unit
+    onAction: (SignosIntencion)->Unit,
 ) {
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
@@ -50,8 +51,8 @@ fun SignosView (
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary
+                    titleContentColor = MaterialTheme.colorScheme.secondary,
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
                 ),
                 title = { Text(text = "Signos") }
             )

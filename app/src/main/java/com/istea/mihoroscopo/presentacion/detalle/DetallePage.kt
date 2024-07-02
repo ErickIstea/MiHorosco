@@ -22,6 +22,7 @@ fun DetallePage(
         state = viewModel.uiState,
         onAction = { intencion ->
             viewModel.ejecutar(intencion)
-        }
+        },
+        navController = navHostController
     )
 }
