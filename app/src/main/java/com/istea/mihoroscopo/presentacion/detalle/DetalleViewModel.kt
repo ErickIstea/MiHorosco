@@ -20,25 +20,28 @@ class DetalleViewModel(
     var uiState by mutableStateOf<DetalleEstado>(DetalleEstado.Vacio)
 
     fun ejecutar(intencion: DetalleIntencion) {
-        when(intencion){
+        when (intencion) {
             is DetalleIntencion.IrParaAtras -> irParaAtras()
             is DetalleIntencion.CargarContenido -> cargarContenido()
         }
     }
 
-    private fun irParaAtras(){
+    private fun irParaAtras() {
         router.back()
     }
 
-    private fun cargarContenido(){
-
+    private fun cargarContenido() {
+        uiState = DetalleEstado.Cargando
         viewModelScope.launch {
-            val horoscopo = repositorio.getHoroscopo(signoId = signoid)
-            uiState = DetalleEstado.Resultado(horoscopo = horoscopo)
+            try {
+                val horoscopo = repositorio.getHoroscopo(signoId = signoid)
+                uiState = DetalleEstado.Resultado(horoscopo = horoscopo)
+            } catch (e: Exception) {
+                uiState = DetalleEstado.Error(mensaje = e.message ?: "Error desconocido")
+            }
         }
     }
 }
-
 
 class DetalleViewModelFactory(
     private val repositorio: Repository,
@@ -48,7 +51,7 @@ class DetalleViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetalleViewModel::class.java)) {
-            return DetalleViewModel(repositorio,router,signoid) as T
+            return DetalleViewModel(repositorio, router, signoid) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
