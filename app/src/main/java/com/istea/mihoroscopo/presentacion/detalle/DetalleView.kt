@@ -35,12 +35,14 @@ import com.istea.mihoroscopo.repository.Horoscopo
 import com.istea.mihoroscopo.repository.Signo
 
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetalleView (
     modifier: Modifier = Modifier,
     state : DetalleEstado,
-    onAction: (DetalleIntencion)->Unit
+    onAction: (DetalleIntencion)->Unit,
+
 ) {
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
@@ -74,7 +76,7 @@ fun DetalleView (
                 DetalleEstado.Cargando -> Cargando()
                 is DetalleEstado.Error -> Text(text = state.mensaje)
                 is DetalleEstado.Resultado -> Contenido( state.horoscopo )
-                DetalleEstado.Vacio -> Text(text = "")
+                DetalleEstado.Vacio -> Text(text = "loading")
             }
         }
     }
@@ -101,9 +103,9 @@ fun Contenido(horoscopo: Horoscopo){
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
         DescripcionView(horoscopo.signo)
-        PrediccionView(titulo = "Amor", horoscopo.amor)
-        PrediccionView(titulo = "Riqueza", horoscopo.riqueza)
-        PrediccionView(titulo = "Bienestar", horoscopo.bienestar)
+        PrediccionView(titulo = "Amor", prediccion=horoscopo.amor)
+        PrediccionView(titulo = "Riqueza", prediccion = horoscopo.riqueza)
+        PrediccionView(titulo = "Bienestar", prediccion= horoscopo.bienestar)
     }
 }
 
@@ -172,7 +174,8 @@ fun PrediccionView(titulo:String, prediccion: String){
                 modifier = Modifier
                     .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
-                text = "Si aprobar tu quieres, estudiar tu debes"
+                text = prediccion
+
             )
         }
     }

@@ -25,3 +25,5 @@ fun DetallePage(
         }
     )
 }
+
+
