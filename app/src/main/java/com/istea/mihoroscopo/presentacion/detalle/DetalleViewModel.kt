@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.istea.mihoroscopo.presentacion.signos.SignosEstado
 import com.istea.mihoroscopo.repository.Repository
 import com.istea.mihoroscopo.router.Router
+import com.istea.mihoroscopo.router.Ruta
 import kotlinx.coroutines.launch
 
 class DetalleViewModel(
@@ -28,6 +29,8 @@ class DetalleViewModel(
 
     private fun irParaAtras(){
         router.back()
+
+
     }
 
     private fun cargarContenido(){
