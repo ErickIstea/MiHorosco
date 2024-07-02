@@ -87,6 +87,7 @@ fun Cargando() {
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ){
+        Text(text = "Cargando...")
         CircularProgressIndicator(
             modifier = Modifier.size(160.dp),
             strokeWidth = 20.dp,
