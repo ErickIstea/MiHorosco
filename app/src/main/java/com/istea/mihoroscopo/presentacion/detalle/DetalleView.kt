@@ -51,13 +51,14 @@ fun DetalleView (
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,  // primaryContainer
+                    titleContentColor = MaterialTheme.colorScheme.secondary         // primary
                 ),
                 title = { Text(text = "Horoscopo") },
                 navigationIcon = {
                     IconButton(onClick = {
-
+                        // added intencion
+                        onAction(DetalleIntencion.IrParaAtras)
                     }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
@@ -172,7 +173,8 @@ fun PrediccionView(titulo:String, prediccion: String){
                 modifier = Modifier
                     .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
-                text = "Si aprobar tu quieres, estudiar tu debes"
+//                text = "Si aprobar tu quieres, estudiar tu debes"
+                text = prediccion
             )
         }
     }

@@ -31,6 +31,8 @@ class DetalleViewModel(
     }
 
     private fun cargarContenido(){
+        // change state
+        uiState = DetalleEstado.Cargando
 
         viewModelScope.launch {
             val horoscopo = repositorio.getHoroscopo(signoId = signoid)
