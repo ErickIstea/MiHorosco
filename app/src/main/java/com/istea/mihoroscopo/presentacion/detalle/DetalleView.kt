@@ -40,7 +40,7 @@ import com.istea.mihoroscopo.repository.Signo
 fun DetalleView (
     modifier: Modifier = Modifier,
     state : DetalleEstado,
-    onAction: (DetalleIntencion)->Unit
+    onAction: (DetalleIntencion)->Unit,
 ) {
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
@@ -57,7 +57,7 @@ fun DetalleView (
                 title = { Text(text = "Horoscopo") },
                 navigationIcon = {
                     IconButton(onClick = {
-
+                        onAction(DetalleIntencion.IrParaAtras)
                     }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
