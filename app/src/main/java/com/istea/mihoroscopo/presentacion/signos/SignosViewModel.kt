@@ -38,6 +38,7 @@ class SignosViewModel(
     }
 
     private fun seleccionar(signo: Signo){
+        uiState = SignosEstado.Cargando
         router.navegar(Ruta.Detalle(signo))
     }
 }
