@@ -57,7 +57,7 @@ fun DetalleView (
                 title = { Text(text = "Horoscopo") },
                 navigationIcon = {
                     IconButton(onClick = {
-
+                        onAction(DetalleIntencion.IrParaAtras)
                     }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
