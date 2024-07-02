@@ -31,10 +31,14 @@ class DetalleViewModel(
     }
 
     private fun cargarContenido(){
-
+        uiState = DetalleEstado.Cargando
         viewModelScope.launch {
-            val horoscopo = repositorio.getHoroscopo(signoId = signoid)
-            uiState = DetalleEstado.Resultado(horoscopo = horoscopo)
+            try {
+                val horoscopo = repositorio.getHoroscopo(signoId = signoid)
+                uiState = DetalleEstado.Resultado(horoscopo = horoscopo)
+            } catch (e: Exception) {
+                uiState = DetalleEstado.Error(mensaje = "Error al cargar el contenido")
+            }
         }
     }
 }

@@ -51,12 +51,12 @@ fun DetalleView (
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.secondary
                 ),
                 title = { Text(text = "Horoscopo") },
                 navigationIcon = {
-                    IconButton(onClick = {
+                    IconButton(onClick = {onAction(DetalleIntencion.IrParaAtras)
 
                     }) {
                         Icon(
@@ -101,9 +101,9 @@ fun Contenido(horoscopo: Horoscopo){
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
         DescripcionView(horoscopo.signo)
-        PrediccionView(titulo = "Amor", horoscopo.amor)
-        PrediccionView(titulo = "Riqueza", horoscopo.riqueza)
-        PrediccionView(titulo = "Bienestar", horoscopo.bienestar)
+        PrediccionView(titulo = "Amor", prediccion = horoscopo.amor)
+        PrediccionView(titulo = "Riqueza", prediccion = horoscopo.riqueza)
+        PrediccionView(titulo = "Bienestar", prediccion = horoscopo.bienestar)
     }
 }
 
@@ -172,7 +172,7 @@ fun PrediccionView(titulo:String, prediccion: String){
                 modifier = Modifier
                     .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
-                text = "Si aprobar tu quieres, estudiar tu debes"
+                text = prediccion
             )
         }
     }
