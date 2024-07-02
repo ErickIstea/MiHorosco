@@ -31,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.navigation.NavHostController
 import com.istea.mihoroscopo.repository.Horoscopo
 import com.istea.mihoroscopo.repository.Signo
 
@@ -40,7 +41,8 @@ import com.istea.mihoroscopo.repository.Signo
 fun DetalleView (
     modifier: Modifier = Modifier,
     state : DetalleEstado,
-    onAction: (DetalleIntencion)->Unit
+    onAction: (DetalleIntencion)->Unit,
+    navController: NavHostController
 ) {
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
@@ -57,7 +59,7 @@ fun DetalleView (
                 title = { Text(text = "Horoscopo") },
                 navigationIcon = {
                     IconButton(onClick = {
-
+                        navController.popBackStack()
                     }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
