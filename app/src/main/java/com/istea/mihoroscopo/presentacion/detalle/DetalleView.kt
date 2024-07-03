@@ -41,8 +41,7 @@ import com.istea.mihoroscopo.router.Router
 fun DetalleView(
     modifier: Modifier = Modifier,
     state: DetalleEstado,
-    onAction: (DetalleIntencion) -> Unit,
-    router: Router
+    onAction: (DetalleIntencion) -> Unit
 ) {
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         onAction(DetalleIntencion.CargarContenido)
@@ -58,7 +57,7 @@ fun DetalleView(
                 title = { Text(text = "Horóscopo") },
                 navigationIcon = {
                     IconButton(onClick = {
-                        router.back()
+                        onAction(DetalleIntencion.IrParaAtras)
                     }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
@@ -172,7 +171,7 @@ fun PrediccionView(titulo:String, prediccion: String){
                 modifier = Modifier
                     .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
-                text = prediccion 
+                text = prediccion // cambiar solo esta linea
             )
         }
     }

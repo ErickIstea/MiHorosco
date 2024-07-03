@@ -19,13 +19,10 @@ fun DetallePage(
         )
     )
 
-    val router = Router(navHostController)
-
     DetalleView(
         state = viewModel.uiState,
         onAction = { intencion ->
             viewModel.ejecutar(intencion)
-        },
-        router = router
+        }
     )
 }
