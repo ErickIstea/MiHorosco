@@ -87,7 +87,7 @@ fun Cargando() {
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ){
-        Text(text = "Loading...")
+        //Text(text = "Loading...") descomento si quiero que se vea algo, sino lo dejo asi
         CircularProgressIndicator(
             modifier = Modifier.size(160.dp),
             strokeWidth = 20.dp,
